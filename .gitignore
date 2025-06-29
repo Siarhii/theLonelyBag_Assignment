@@ -14,7 +14,6 @@ logs/
 # Runtime data
 *.sqlite
 *.db
-*.json
 /app/data/ # Exclude the actual data directory from Git if it's within the repo
 
 # macOS

@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const DATA_DIR = '/app/data';
+const DATA_DIR = '/app/data'; //this is the main dir for persistent storage , inside docker it should create a directory if there is none, and our ec2 directory will be mpunted as /app/data inside docker
 const COUNTER_FILE = path.join(DATA_DIR, 'count.txt');
 
 if (!fs.existsSync(DATA_DIR)) {

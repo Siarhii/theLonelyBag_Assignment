@@ -159,3 +159,8 @@ create cloud-init.sh
 create a new ec2 (we alsready have security group , vpc setup previously, just need to selet it from dropdown, under advance we upload out cloud-init.sh in userdata input ) and finally launch it
 
 # step 8 : creating a deploy.sh
+
+create a deploy.sh file
+enter our first ec2 inistance
+git clone github repo
+change permissions for deploy.sh and execute the script

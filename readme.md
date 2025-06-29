@@ -4,6 +4,18 @@
 
 This repository contains the complete implementation of a Node.js web application that has been containerized with Docker and deployed on AWS EC2 with automation features.
 
+## Project Summary
+
+This project involved deploying a simple Node.js and Express.js web application. The core focus was not on the application's complexity, but on the surrounding DevOps practices to ensure a robust, secure, and automated deployment pipeline.
+
+To guarantee **persistent storage** and prevent data loss upon container restarts, the application's data directory (`/app/data`) was mapped using Docker's **bind mounts**. This was implemented both in the local development environment—linking to a folder on the host machine—and on the EC2 instance, where it was mapped to `/home/ubuntu/thelonelybag_appdata`. This ensures that the application's data resides on the host filesystem and persists independently of the container's lifecycle.
+
+Significant emphasis was placed on **enhancing security**. The default SSH port 22 was changed to a non-standard port (1234) to protect against automated bots and brute-force attacks that commonly target the default port. Furthermore, to address the security risks associated with my ISP's use of Carrier-Grade NAT (CGNAT)—where multiple users share a single public IPv4 address—SSH access to the EC2 instance was restricted to my unique **IPv6 address only**. This measure prevents unauthorized access attempts from other users on the same shared IPv4 network.
+
+While management access was secured via IPv6, the web application itself was made accessible over both **IPv4 and IPv6**. This dual-stack configuration ensures the application is reachable by all users, regardless of their network protocol, providing maximum accessibility and a modern network architecture.
+
+Finally, the entire deployment process was automated. A `cloud-init` script was developed to provision a new EC2 instance by installing Docker and deploying the application on boot. Additionally, a `deploy.sh` script was created to automate the setup process on an already running instance, streamlining any future deployments or updates.
+
 ## Table of Contents
 
 - [Step 1: GitHub Repository Setup](#step-1-github-repository-setup)
@@ -34,7 +46,10 @@ git push -u origin main
 
 **Deliverable:** GitHub repository created and initialized
 
-![GitHub Repository Setup](./images/gitclone%20repo%20and%20running%20deploy.sh%20in%20ec2.png)
+### GitHub Repository Link
+
+**Deliverable:** The complete source code and documentation are available at the following GitHub repository:
+[https://github.com/Siarhii/theLonelyBag_Assignment](https://github.com/Siarhii/theLonelyBag_Assignment)
 
 ---
 
@@ -395,50 +410,3 @@ theLonelyBag_Assignment/
 - `cloud-init ec2 instance running.png` - Cloud-init automated EC2 instance
 - `cloud-init ec2 output url (ipv4 url).png` - Automated deployment verification
 - `gitclone repo and running deploy.sh in ec2.png` - Deployment script execution
-
-### Additional Documentation
-
-- `root login.png` - System access verification and administrative privileges
-
-![Root Access Verification](./images/root%20login.png)
-
-## Screenshots Coverage Summary
-
-**Total Screenshots: 29 files documenting complete workflow**
-
-### Missing Visual Documentation (Covered by Commands/Logs):
-
-While comprehensive visual documentation has been provided, some technical processes are better documented through command output and logs rather than screenshots:
-
-- **Docker installation process** - Multi-step CLI installation documented in command history
-- **Package updates and system configuration** - Terminal output shows successful operations
-- **Git repository initialization** - Command-line operations with version control setup
-- **Network configuration details** - IPv6 routing and interface configuration
-- **Container internal processes** - Application startup logs and internal container state
-- **File system permissions** - Detailed permission changes via CLI commands
-- **AWS CLI configuration** - Credential setup and region configuration processes
-
-### Documentation Methodology:
-
-The visual documentation strategy employed covers all critical verification points:
-
-- **Before/After states** for major configuration changes
-- **User interface confirmations** for AWS console operations
-- **Network accessibility proofs** showing dual-stack (IPv4/IPv6) functionality
-- **Security implementations** demonstrating hardened SSH access
-- **Automation results** proving cloud-init and deployment script effectiveness
-- **Integration verifications** confirming IAM roles and S3 access functionality
-
-This comprehensive approach ensures both visual proof and technical depth for complete project validation.
-
-## Technologies Used
-
-- **Backend:** Node.js, Express.js
-- **Containerization:** Docker
-- **Cloud Platform:** AWS EC2, S3, IAM
-- **Version Control:** Git, GitHub
-- **Automation:** Shell scripting, Cloud-init
-
-## Conclusion
-
-Successfully completed all assignment requirements including bonus tasks. The application is fully containerized, deployed on AWS EC2 with proper security configurations, automated deployment, and cloud integration features.

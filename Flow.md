@@ -123,4 +123,39 @@ Bash
 docker run hello-world
 You should see a message indicating Docker is installed and working.
 
-5.2 clone my git repo
+5.2 pull/run docker image i have uploaded from my local machine (docker push sarthak69/thelonelybag-assignment:2.0) using docker pull sarthak69/thelonelybag-assignment:2.0 in ec2 and then docker run with portmapping, and bind mounting docker run -d -p 8080:3000 --name thelonelybag-assignment-ec2 --mount type=bind,source=/home/ubuntu/thelonelybag_appdata,target=/app/data sarthak69/thelonelybag-assignment:2.0
+
+# step 6 : bonus task IAM access
+
+all the stuff in aws console for iam
+create s3
+create iam role
+assign iam role to ec2
+
+## check s3 access from ec2
+
+1.  Install unzip (often needed for the bundled installer)
+    sudo apt update
+    sudo apt install -y unzip
+
+2.  Download the AWS CLI v2 bundled installer
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+3.  Unzip the installer
+    unzip awscliv2.zip
+
+4.  Run the install script
+    sudo ./aws/install
+
+        5. Verify the installation
+
+    aws --version
+
+check if s3 is accessible from ec2 using aws s3 ls
+
+# step 7 : launching a new ec2 using cloud-init
+
+create cloud-init.sh
+create a new ec2 (we alsready have security group , vpc setup previously, just need to selet it from dropdown, under advance we upload out cloud-init.sh in userdata input ) and finally launch it
+
+# step 8 : creating a deploy.sh
